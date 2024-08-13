@@ -1,4 +1,4 @@
-import ApiService from "@/app/services/index";
+import ApiService from "@/services/index";
 
 
 class ProductsService extends ApiService {

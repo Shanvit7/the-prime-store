@@ -1,6 +1,7 @@
 'use client';
+// HOOKS
+import useGetProducts from "./hooks/useGetProducts";
 
-import useGetProducts from "../hooks/products/useGetProducts";
 const Products = () => {
   const { data = []} = useGetProducts();
   return <h1>Products</h1>;
