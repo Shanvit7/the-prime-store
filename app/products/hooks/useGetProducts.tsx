@@ -7,14 +7,12 @@ import { productsApi } from "@/services/products";
 import { ALL_PRODUCTS_API } from "@/utils/constants";
 
 const useGetProducts = () => {
-  const { getProductsList = () => {} } = productsApi ?? {};
   const {
-    data = {},
+    data = [],
     error,
     isLoading = true,
     mutate,
-  } = useSWR(ALL_PRODUCTS_API, () => getProductsList());
-
+  } = useSWR(ALL_PRODUCTS_API,async () => productsApi.getProductsList());
   return {
     data,
     isLoading,
