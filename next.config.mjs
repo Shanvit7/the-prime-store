@@ -4,17 +4,7 @@ const nextConfig = {
       remotePatterns: [
         {
           protocol: 'https',
-          hostname: 'placeimg.com',
-          port: '',
-        },
-        {
-          protocol: 'https',
-          hostname: 'i.imgur.com',
-          port: '',
-        },
-        {
-          protocol: 'https',
-          hostname: 'www.clarin.com',
+          hostname: 'cdn.dummyjson.com',
           port: '',
         },
       ],

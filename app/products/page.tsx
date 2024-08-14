@@ -6,7 +6,7 @@ import LoadingSkeletonGroup from "@/components/products/skeleton-group";
 import useGetProducts from "./hooks/useGetProducts";
 
 const Products = () => {
-  const { data: products = [], isLoading = true} = useGetProducts() ?? {};
+  const {  products = [] , isLoading = true} = useGetProducts({ limit: 10 }) ?? {};
   if(isLoading){
     return <LoadingSkeletonGroup />
   };
