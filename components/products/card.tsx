@@ -1,4 +1,5 @@
 import Image from "next/image";
+import AddToCartButton from "./buttons/add-to-cart";
 import { getImageUrl } from "@/utils";
 
 const Card = ({ data = {} }) => {
@@ -9,8 +10,8 @@ const Card = ({ data = {} }) => {
     images.length > 1 ? getImageUrl(images[1]) : primaryImage;
 
   return (
-    <div className="group relative block overflow-hidden h-full shadow-xl">
-      <div className="relative h-56 lg:h-64 overflow-hidden">
+    <div className="group relative block overflow-hidden h-full shadow-xl rounded-lg">
+      <div className="relative bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 shadow-lg h-56 lg:h-64 overflow-hidden">
         <Image
           src={primaryImage}
           alt={title}
@@ -29,18 +30,14 @@ const Card = ({ data = {} }) => {
         />
       </div>
 
-      <div className="relative border border-gray-100 bg-white p-6 h-1/2">
+      <div className="relative border border-gray-200 bg-white p-6 h-1/2 rounded-b-lg">
         <h3 className="mt-4 text-lg font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
           {title}
         </h3>
-        <div className="mt-1.5 flex items-center justify-between text-gray-900">
-          <p className="tracking-wide">${price}</p>
+        <div className="flex items-center justify-between mt-4">
+          <p className="tracking-wide text-gray-700">${price}</p>
+          <AddToCartButton />
         </div>
-        <form className="mt-4">
-          <button className="block w-full rounded bg-yellow-400 p-2 text-sm font-medium transition hover:scale-105">
-            Add to Cart
-          </button>
-        </form>
       </div>
     </div>
   );

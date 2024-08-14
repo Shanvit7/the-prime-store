@@ -21,7 +21,7 @@ const Skeleton = () => {
         <div className="h-5 bg-gray-300 dark:bg-gray-700 rounded-md animate-pulse w-1/4"></div>
         
         {/* Button */}
-        <div className="mt-4 h-10 bg-yellow-200 dark:bg-yellow-700 rounded-md animate-pulse"></div>
+        <div className="mt-4 h-10 w-1/2 bg-yellow-200 dark:bg-yellow-700 rounded-md animate-pulse"></div>
       </div>
     </div>
   );

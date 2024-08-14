@@ -1,3 +1,6 @@
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
 export const getImageUrl = (imageData: string | []) => {
     if (typeof imageData === 'string') {
       try {
@@ -22,4 +25,8 @@ export const getImageUrl = (imageData: string | []) => {
     }
     // If all else fails, return an empty string or a default image URL
     return '';
+};
+
+export const cn=(...inputs: ClassValue[])=>{
+  return twMerge(clsx(inputs));
 };
