@@ -1,5 +1,3 @@
-'use client';
-
 import ApiService from "@/services/index";
 
 class ProductsService extends ApiService {
@@ -8,7 +6,10 @@ class ProductsService extends ApiService {
   };
   async getProductsList(limit: number = 30, skip: number = 0): Promise<any> {
     return this.get(`/products?limit=${limit}&skip=${skip}`);
-  }
+  };
+  async getProductById(productId: number):Promise<any>{
+    return this.get(`/products/${productId}`);
+  };
 }
 
 export const productsApi = new ProductsService();

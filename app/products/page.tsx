@@ -1,9 +1,9 @@
 "use client";
 // COMPONENTS
 import Card from "@/components/products/card";
-import LoadingSkeletonGroup from "@/components/products/skeleton-group";
+import LoadingSkeletonGroup from "../../components/products/skeleton-group";
 // HOOKS
-import useGetProducts from "./hooks/useGetProducts";
+import useGetProducts from "../../hooks/useGetProducts";
 
 const Products = () => {
   const {  products = [] , isLoading = true} = useGetProducts({ limit: 10 }) ?? {};
