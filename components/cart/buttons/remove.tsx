@@ -3,12 +3,12 @@ import { useState, useTransition } from "react";
 // CORE-COMPONENTS
 import StatusButton from "@/components/ui/buttons/status";
 // HOOKS
-import useCartStore from "@/hooks/useCartStore";
+import useCart from "@/hooks/useCart";
 // ASSETS
 import { ShoppingCartIcon } from "@heroicons/react/20/solid";
 
 const RemoveFromCartButton = ({ productId }: { productId: number }) => {
-  const { removeFromCart } = useCartStore();
+  const { removeFromCart } = useCart() ?? {};
 
   const [isPending, startTransition] = useTransition();
   const [isSuccess, setIsSuccess] = useState(false);

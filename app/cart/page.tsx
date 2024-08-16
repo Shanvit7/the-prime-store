@@ -1,11 +1,11 @@
 "use client";
 // HOOKS
-import useCartStore from "@/hooks/useCartStore";
+import useCart from "@/hooks/useCart";
 // COMPONENTS
 import CartCard from "@/components/cart/card";
 
 const Cart = () => {
-  const { cart = [] } = useCartStore() ?? {};
+  const { cart = [] } = useCart() ?? {};
   return (
     <>
       <section>
