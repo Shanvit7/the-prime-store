@@ -1,21 +1,30 @@
 "use client";
+import { useState, useTransition } from "react";
 // CORE-COMPONENTS
 import StatusButton from "@/components/ui/buttons/status";
 // HOOKS
-import useCart from "@/hooks/useCart";
+import useCartStore from "@/hooks/useCartStore";
 // ASSETS
 import { ShoppingCartIcon } from "@heroicons/react/20/solid";
 
 const AddToCartButton = ({ productId }: { productId: number }) => {
-  const {
-    addToCart,
-    isLoading = false,
-    isSuccess = false,
-    isError = false,
-  } = useCart() ?? {};
+  const { addToCart } = useCartStore();
+
+  const [isPending, startTransition] = useTransition();
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleOnClick = () => {
-    addToCart({ productId, quantity: 1 });
+    setIsSuccess(false);
+    setIsError(false);
+    startTransition(async () => {
+      try {
+        await addToCart(productId, 1);
+        setIsSuccess(true);
+      } catch (error) {
+        setIsError(true);
+      }
+    });
   };
 
   return (
@@ -26,10 +35,10 @@ const AddToCartButton = ({ productId }: { productId: number }) => {
       errorText="Failed to add to cart."
       successIcon={ShoppingCartIcon}
       onClick={handleOnClick}
-      isLoading={isLoading}
+      isLoading={isPending}
       isSuccess={isSuccess}
       isError={isError}
-      disabled={isLoading}
+      disabled={isPending}
     />
   );
 };

@@ -1,18 +1,19 @@
-'use client';
+"use client";
+
 // CORE-COMPONENTS
 import Image from "next/image";
 // COMPONENTS
 import AddToCartButton from "@/components/cart/buttons/add";
 import RemoveFromCartButton from "@/components/cart/buttons/remove";
 // HOOKS
-import useCart from "@/hooks/useCart";
+import useCartStore from "@/hooks/useCartStore";
 // UTILS
 import { getImageUrl } from "@/utils";
 
 const Card = ({ data = {} }) => {
-  const { isProductInCart } = useCart() ?? {};
-  const { id: productId = 0, images = [], title = "", price = 0 } = data ?? {};
-  const { inCart = false } = isProductInCart(productId);
+  const { isProductInCart, cart = [] } = useCartStore();
+  const { id: productId = 0, images = [], title = "", price = 0 } = data;
+  const { inCart, quantity } = isProductInCart(productId);
   const primaryImage = getImageUrl(images?.[0]);
   const secondaryImage =
     images.length > 1 ? getImageUrl(images[1]) : primaryImage;
@@ -44,7 +45,7 @@ const Card = ({ data = {} }) => {
         </h3>
         <div className="flex items-center justify-between mt-4">
           <p className="tracking-wide text-gray-700">${price}</p>
-          {inCart ? (
+          {inCart && quantity > 0 ? (
             <RemoveFromCartButton productId={productId} />
           ) : (
             <AddToCartButton productId={productId} />
