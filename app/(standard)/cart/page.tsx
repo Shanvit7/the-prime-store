@@ -8,7 +8,7 @@ const Cart = () => {
   const { cart = [] } = useCart() ?? {};
   return (
     <>
-      <section>
+      <section className="bg-white shadow-2xl">
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
           <div className="mx-auto max-w-3xl">
             <header className="text-center">
@@ -73,7 +73,7 @@ const Cart = () => {
                   <div className="flex justify-end">
                     <a
                       href="#"
-                      className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+                      className="block rounded bg-yellow-400 px-5 py-3 text-sm text-white transition hover:bg-yellow-500"
                     >
                       Checkout
                     </a>

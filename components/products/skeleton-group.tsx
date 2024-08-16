@@ -1,6 +1,6 @@
 const Skeleton = () => {
   return (
-    <div className="min-w-full h-96 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+    <div className="min-w-56 h-96 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
       {/* Image placeholder */}
       <div className="h-48 bg-gray-300 dark:bg-gray-700 animate-pulse">
         <div className="h-full w-full bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-600 to-transparent animate-shimmer"></div>
@@ -29,7 +29,7 @@ const Skeleton = () => {
 
 const LoadingSkeletonGroup = () => {
   return (
-    <div className="grid grid-cols-3 gap-2">
+    <div className="grid grid-cols-4 gap-4 px-8">
       {[...Array(9)].map((_, index) => (
         <Skeleton key={index} />
       ))}
