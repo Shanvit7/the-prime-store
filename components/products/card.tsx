@@ -12,7 +12,6 @@ import { getImageUrl } from "@/utils";
 
 const Card = ({ data = {} }) => {
   const { isProductInCart, cart = [] } = useCart() ?? {};
-  console.log(cart);
   const { id: productId = 0, images = [], title = "", price = 0 } = data;
   const { inCart, quantity } = isProductInCart(productId);
   const primaryImage = getImageUrl(images?.[0]);
