@@ -11,7 +11,7 @@ interface CartCardProps {
   productId: number;
 }
 
-const CartCard: FC<CartCardProps> = ({ productId }) => {
+const Card: FC<CartCardProps> = ({ productId }) => {
   const { removeFromCart, updateCartItemQuantity, isProductInCart } =
     useCart() ?? {};
 
@@ -106,4 +106,4 @@ const CartCard: FC<CartCardProps> = ({ productId }) => {
   );
 };
 
-export default CartCard;
+export default Card;

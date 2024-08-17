@@ -56,7 +56,7 @@ const StatusButton: React.FC<StatusButtonProps> = ({
       onClick={handleClick}
       disabled={disabled || isLoading}
       className={cn(
-        "group relative h-10 min-w-40 overflow-hidden rounded-md bg-yellow-400 px-6 text-sm font-semibold text-white transition-colors duration-300 hover:bg-yellow-500 disabled:bg-gray-300 disabled:cursor-not-allowed",
+        "group relative h-8 min-w-20 overflow-hidden rounded-md bg-yellow-400 px-6 text-sm font-semibold text-white transition-colors duration-300 hover:bg-yellow-500 disabled:bg-gray-300 disabled:cursor-not-allowed",
         className
       )}
     >

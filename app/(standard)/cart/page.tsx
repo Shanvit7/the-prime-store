@@ -2,7 +2,7 @@
 // HOOKS
 import useCart from "@/hooks/useCart";
 // COMPONENTS
-import CartCard from "@/components/cart/card";
+import Card from "@/components/cart/card";
 
 const Cart = () => {
   const { cart = [] } = useCart() ?? {};
@@ -20,7 +20,7 @@ const Cart = () => {
             <div className="mt-8">
               <ul className="space-y-4">
                 {cart.map(({ productId, id }) => (
-                  <CartCard key={id} productId={productId} />
+                  <Card key={id} productId={productId} />
                 ))}
               </ul>
               <div className="mt-8 flex justify-end border-t border-gray-100 pt-8">

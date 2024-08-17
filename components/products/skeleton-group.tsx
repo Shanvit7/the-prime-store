@@ -1,27 +1,34 @@
 const Skeleton = () => {
   return (
-    <div className="min-w-56 h-96 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+    <div className="min-w-56 max-w-xs h-96 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden flex flex-col">
       {/* Image placeholder */}
-      <div className="h-48 bg-gray-300 dark:bg-gray-700 animate-pulse">
-        <div className="h-full w-full bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-600 to-transparent animate-shimmer"></div>
+      <div className="relative h-48 bg-gray-300 dark:bg-gray-700 animate-pulse">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-600 to-transparent animate-shimmer"></div>
       </div>
-      
+
       {/* Content area */}
-      <div className="p-4 space-y-3">
+      <div className="p-4 flex flex-col flex-grow bg-white border-t border-gray-200 rounded-b-lg">
         {/* Title */}
-        <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded-md animate-pulse w-3/4"></div>
-        
-        {/* Description */}
-        <div className="space-y-2">
-          <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded-md animate-pulse"></div>
-          <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded-md animate-pulse w-5/6"></div>
+        <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded-md animate-pulse w-3/4 mb-2"></div>
+
+        {/* Variant Circles */}
+        <div className="py-2 flex space-x-2 overflow-x-auto">
+          {[...Array(4)].map((_, index) => (
+            <div
+              key={index}
+              className="w-8 h-8 bg-gray-300 dark:bg-gray-700 rounded-full animate-pulse"
+            ></div>
+          ))}
         </div>
-        
-        {/* Price */}
-        <div className="h-5 bg-gray-300 dark:bg-gray-700 rounded-md animate-pulse w-1/4"></div>
-        
-        {/* Button */}
-        <div className="mt-4 h-10 w-1/2 bg-yellow-200 dark:bg-yellow-700 rounded-md animate-pulse"></div>
+
+        {/* Price and Button */}
+        <div className="flex flex-col mt-auto">
+          {/* Price */}
+          <div className="h-5 bg-gray-300 dark:bg-gray-700 rounded-md animate-pulse w-1/4 mb-2"></div>
+
+          {/* Button */}
+          <div className="h-10 bg-yellow-200 dark:bg-yellow-700 rounded-md animate-pulse w-1/2"></div>
+        </div>
       </div>
     </div>
   );
@@ -29,7 +36,7 @@ const Skeleton = () => {
 
 const LoadingSkeletonGroup = () => {
   return (
-    <div className="grid grid-cols-4 gap-4 px-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-8">
       {[...Array(9)].map((_, index) => (
         <Skeleton key={index} />
       ))}
