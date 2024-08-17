@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, useAnimation } from "framer-motion";
+import Image from "next/image";
 import { cn } from "@/utils";
 // CONSTANTS
 import { TOPBAR_TABS } from "@/utils/constants";
@@ -40,17 +41,33 @@ const TopBar = () => {
   }, [pathname]);
 
   return (
-    <div className="flex flex-wrap items-center justify-center gap-4 bg-white shadow-lg p-6">
-      {TOPBAR_TABS.map(({ text, Icon, route }) => (
-        <Tab
-          text={text}
-          selected={selectedRoute === route}
-          onClick={handleTabClick(route)}
-          Icon={Icon}
-          key={route}
-          controls={controls}
+    <div className="grid grid-cols-3 items-center bg-white shadow-lg p-6">
+      {/* Logo */}
+      <div className="flex justify-start items-center">
+        <Image
+          src="/logo.svg"
+          alt="The Prime Store Logo"
+          width={200}
+          height={40}
         />
-      ))}
+      </div>
+      {/* Empty column to keep grid structure */}
+      <div />
+      {/* Tabs */}
+      <div className="flex justify-end items-center">
+        <div className="flex space-x-4">
+          {TOPBAR_TABS.map(({ text, Icon, route }) => (
+            <Tab
+              text={text}
+              selected={selectedRoute === route}
+              onClick={handleTabClick(route)}
+              Icon={Icon}
+              key={route}
+              controls={controls}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
@@ -91,3 +108,4 @@ const Tab = ({
 };
 
 export default TopBar;
+
