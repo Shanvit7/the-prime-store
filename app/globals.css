@@ -7,6 +7,8 @@
   --foreground-rgb: 51, 51, 51; /* Primary text color */
   --background-start-rgb: 247, 247, 247; /* Light gray */
   --background-end-rgb: 255, 255, 255; /* White */
+  --scrollbar-thumb-color: #facc15; /* Yellow color for scrollbar thumb */
+  --scrollbar-track-color: #f1f1f1; /* Light gray for scrollbar track */
 }
 
 /* Dark Mode Styles */
@@ -14,21 +16,46 @@
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 0, 0, 0;
   --background-end-rgb: 0, 0, 0;
+  --scrollbar-thumb-color: #fbbf24; /* Darker yellow for dark mode */
+  --scrollbar-track-color: #333; /* Dark gray for scrollbar track */
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
-      rgb(var(--background-start-rgb)),
-      rgb(var(--background-end-rgb))
-    );
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
   min-height: 100vh;
-
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  /* Webkit scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--scrollbar-track-color));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--scrollbar-thumb-color));
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #fbbf24; /* Darker yellow on hover */
+  }
+
+  /* For Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--scrollbar-thumb-color)) rgb(var(--scrollbar-track-color)); /* thumb and track color */
   }
 }
