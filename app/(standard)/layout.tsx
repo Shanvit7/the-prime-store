@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 // HOOKS
 import useCart from "@/hooks/useCart";
+import useGetCurrency from "@/hooks/useGetCurrency";
 // TYPES
 import { type ReactNode } from "react";
 
@@ -14,14 +15,18 @@ const StandardLayout = ({
   children: ReactNode;
 }>) => {
   const initializeCart = useCart((state) => state.initializeCart);
+  const fetchCurrencyData = useGetCurrency((state) => state.fetchCurrencyData);
 
   useEffect(() => {
-    const fetchAndInitializeCart = async () => {
-      await initializeCart();
+    const initialize = async () => {
+      await Promise.all([
+        initializeCart(),
+        fetchCurrencyData()
+      ]);
     };
 
-    fetchAndInitializeCart();
-  }, [initializeCart]);
+    initialize();
+  }, [initializeCart, fetchCurrencyData]);
 
   return (
     <div className="grid grid-cols-5">

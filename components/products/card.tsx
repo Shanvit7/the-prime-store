@@ -1,19 +1,20 @@
 "use client";
 
-// CORE-COMPONENTS
-import Image from "next/image";
 // COMPONENTS
 import AddToCartButton from "@/components/cart/buttons/add";
 import RemoveFromCartButton from "@/components/cart/buttons/remove";
 import VariantCircles from "@/components/products/variant-circles";
+import Image from "next/image";
 // HOOKS
 import useCart from "@/hooks/useCart";
+import useGetCurrency from "@/hooks/useGetCurrency";
 // UTILS
 import { getImageUrl } from "@/utils";
 import { useState } from "react";
 
 const Card = ({ data = {} }) => {
   const { isProductInCart } = useCart() ?? {};
+  const { localCurrency, convertPrice, isLoading } = useGetCurrency() ?? {};
   const {
     id: productId = 0,
     images = [],
@@ -27,6 +28,7 @@ const Card = ({ data = {} }) => {
   const variantImages = images?.map((img) => getImageUrl(img));
 
   const [currentImage, setCurrentImage] = useState(defaultImage);
+  const localPrice = isLoading ? "..." : convertPrice(price);
 
   return (
     <div className="relative flex flex-col h-full overflow-hidden rounded-lg shadow-xl group">
@@ -57,7 +59,9 @@ const Card = ({ data = {} }) => {
         </div>
 
         <div className="p-4 bg-white border-t border-gray-200 rounded-b-lg flex flex-row items-center justify-between">
-          <p className="text-base text-gray-700">${price}</p>
+          <p className="text-base text-gray-700">
+            {localCurrency} {localPrice}
+          </p>
           <div className="mt-2 flex items-center space-x-2">
             {inCart ? (
               <RemoveFromCartButton productId={productId} />

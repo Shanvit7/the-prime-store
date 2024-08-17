@@ -1,4 +1,4 @@
-// CORE-COMPONENTS
+// COMPONENTS
 import Link from "next/link";
 
 const NotFound = () => {

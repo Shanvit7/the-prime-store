@@ -1,6 +1,6 @@
 "use client";
 import { useState, useTransition } from "react";
-// CORE-COMPONENTS
+// COMPONENTS
 import StatusButton from "@/components/ui/buttons/status";
 // HOOKS
 import useCart from "@/hooks/useCart";

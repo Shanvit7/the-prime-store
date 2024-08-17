@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, useAnimation } from "framer-motion";
 import { cn } from "@/utils";
-// CORE-COMPONENTS
+// COMPONENTS
 import Image from "next/image";
 import Link from "next/link";
 // CONSTANTS

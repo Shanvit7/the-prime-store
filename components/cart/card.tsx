@@ -1,9 +1,11 @@
 "use client";
+
 import { FC, useState, useTransition } from "react";
 import Image from "next/image";
 // HOOKS
 import useGetProduct from "@/hooks/useGetProduct";
 import useCart from "@/hooks/useCart";
+import useGetCurrency from "@/hooks/useGetCurrency";
 // ASSETS
 import { TrashIcon, PlusIcon, MinusIcon } from "@heroicons/react/20/solid";
 
@@ -14,6 +16,8 @@ interface CartCardProps {
 const Card: FC<CartCardProps> = ({ productId }) => {
   const { removeFromCart, updateCartItemQuantity, isProductInCart } =
     useCart() ?? {};
+
+  const { localCurrency, convertPrice, isLoading } = useGetCurrency() ?? {};
 
   const { quantity: prevQuantity = 0 } = isProductInCart(productId);
 
@@ -62,20 +66,32 @@ const Card: FC<CartCardProps> = ({ productId }) => {
   };
 
   return (
-    <li className="flex items-center gap-4 border border-solid">
-      <div className="relative h-20 w-20">
+    <li className="flex items-center gap-4 border-b border-gray-200 py-4">
+      <div className="relative h-24 w-24 flex-shrink-0">
         <Image
           layout="fill"
           objectFit="cover"
           src={thumbnail}
           alt={title}
-          className="size-16 rounded object-cover"
+          className="rounded object-cover"
         />
       </div>
-      <div>
-        <h3 className="text-sm text-gray-900">{title}</h3>
+      <div className="flex flex-col flex-grow">
+        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+        {isLoading ? (
+          <p className="text-sm text-gray-600"> Loading...</p>
+        ) : (
+          <>
+            <p className="text-sm text-gray-600">
+              {localCurrency} {price?.toFixed(2)}
+            </p>
+            <p className="text-sm text-gray-600">
+              Total: {localCurrency} {convertPrice(price * quantity)}
+            </p>
+          </>
+        )}
       </div>
-      <div className="flex flex-1 items-center justify-end gap-2 px-4">
+      <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
           <button
             onClick={handleDecrement}
@@ -95,11 +111,11 @@ const Card: FC<CartCardProps> = ({ productId }) => {
         </div>
         <button
           onClick={handleRemove}
-          className="text-gray-600 transition hover:text-red-600 size-5"
+          className="text-gray-600 transition hover:text-red-600"
           disabled={isPending}
         >
           <span className="sr-only">Remove item</span>
-          <TrashIcon />
+          <TrashIcon className="h-5 w-5" />
         </button>
       </div>
     </li>

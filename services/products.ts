@@ -1,8 +1,8 @@
-import ApiService from "@/services/index";
+import ApiService from "@/services";
 
 class ProductsService extends ApiService {
   constructor() {
-    super(process.env.NEXT_PUBLIC_PRODUCT_API_BASE_URL as string);
+    super(process.env.NEXT_PUBLIC_PRODUCT_API_URL as string);
   };
   async getProductsList(limit: number = 30, skip: number = 0): Promise<any> {
     return this.get(`/products?limit=${limit}&skip=${skip}`);

@@ -1,6 +1,6 @@
 "use client";
 
-// CORE-COMPONENTS
+// COMPONENTS
 import Image from "next/image";
 
 const VariantCircles = ({ images = [], onImageHover, defaultImage }) => {
