@@ -1,39 +1,86 @@
 "use client";
-import { useEffect } from 'react';
-import useCartStore from '@/hooks/useCartStore';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import {
+  getCart,
+  addToCart,
+  removeFromCart,
+  updateCartItemQuantity,
+  clearCart,
+  type CartItem
+} from '@/services/cart';
 
-const useCart = () => {
-  const { cart, fetchCart, addToCart, removeFromCart, updateCartItemQuantity, clearCart, isProductInCart } = useCartStore(state => ({
-    cart: state.cart,
-    fetchCart: state.fetchCart,
-    addToCart: state.addToCart,
-    removeFromCart: state.removeFromCart,
-    updateCartItemQuantity: state.updateCartItemQuantity,
-    clearCart: state.clearCart,
-    isProductInCart: state.isProductInCart,
-  }));
+interface CartState {
+  cart: CartItem[];
+  initializeCart: () => Promise<void>;
+  addToCart: (productId: number, quantity: number) => Promise<void>;
+  removeFromCart: (productId: number) => Promise<void>;
+  updateCartItemQuantity: (productId: number, quantity: number) => Promise<void>;
+  clearCart: () => Promise<void>;
+  isProductInCart: (productId: number) => { inCart: boolean; quantity: number };
+}
 
-  useEffect(() => {
-    const initializeCart = async () => {
-      try {
-        await fetchCart();
-      } catch (error) {
-        console.error('Failed to fetch cart on initialization:', error);
-      }
-    };
+const useCart = create<CartState>()(
+  persist(
+    (set, get) => ({
+      cart: [],
 
-    initializeCart();
-  }, [fetchCart]);
+      initializeCart: async () => {
+        try {
+          const cart = await getCart();
+          set({ cart });
+        } catch (error) {
+          console.error('Failed to initialize cart:', error);
+        }
+      },
 
-  return {
-    cart,
-    fetchCart,
-    addToCart,
-    removeFromCart,
-    updateCartItemQuantity,
-    clearCart,
-    isProductInCart,
-  };
-};
+      addToCart: async (productId: number, quantity: number) => {
+        try {
+          const cart = await addToCart(productId, quantity);
+          set({ cart });
+        } catch (error) {
+          console.error('Failed to add to cart:', error);
+        }
+      },
+
+      removeFromCart: async (productId: number) => {
+        try {
+          const cart = await removeFromCart(productId);
+          set({ cart });
+        } catch (error) {
+          console.error('Failed to remove from cart:', error);
+        }
+      },
+
+      updateCartItemQuantity: async (productId: number, quantity: number) => {
+        try {
+          const cart = await updateCartItemQuantity(productId, quantity);
+          set({ cart });
+        } catch (error) {
+          console.error('Failed to update cart item quantity:', error);
+        }
+      },
+
+      clearCart: async () => {
+        try {
+          await clearCart();
+          set({ cart: [] });
+        } catch (error) {
+          console.error('Failed to clear cart:', error);
+        }
+      },
+
+      isProductInCart: (productId: number) => {
+        const cart = get().cart;
+        const item = cart.find((item) => item.productId === productId);
+        return { inCart: !!item, quantity: item ? item.quantity : 0 };
+      },
+    }),
+    {
+      name: 'cart-storage',
+      getStorage: () => localStorage, 
+    }
+  )
+);
 
 export default useCart;
