@@ -1,8 +1,9 @@
 "use client";
 // UTILS
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 // HOOKS
 import useCart from "@/hooks/useCart";
+import useGetCartProducts from "@/hooks/useGetCartProducts";
 import useGetCurrency from "@/hooks/useGetCurrency";
 // COMPONENTS
 import Card from "@/components/cart/card";
@@ -11,23 +12,26 @@ import Link from "next/link";
 
 const Cart = () => {
   const { cart = [] } = useCart() ?? {};
-  const [isLoading, setIsLoading] = useState(true);
+  const ids = useMemo(() => cart.map((item) => item.productId), [cart]);
+  const { products = [], isLoading = true } = useGetCartProducts({ ids }) ?? {};
   const {
     localCurrency,
     convertPrice,
     isLoading: isFormmatingPrice = true,
   } = useGetCurrency() ?? {};
 
-  // Simulate loading delay as data being fetched from local storage / redis db
-  useEffect(() => {
-    const loadCartData = async () => {
-      // Simulate a delay for fetching data
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      setIsLoading(false);
-    };
+  // Billing logic
+  const { subtotal, discount, total } = useMemo(() => {
+    const subtotal = cart.reduce((acc, cartItem) => {
+      const product = products.find((p) => p.id === cartItem.productId);
+      return acc + (product?.price ?? 0) * cartItem.quantity;
+    }, 0);
 
-    loadCartData();
-  }, []);
+    const discount = 0;
+    const total = subtotal - discount;
+
+    return { subtotal, discount, total };
+  }, [cart, products]);
 
   return (
     <section className="bg-white shadow-2xl">
@@ -44,8 +48,8 @@ const Cart = () => {
               {isLoading ? (
                 <LoadingSkeletonGroup />
               ) : (
-                cart.map(({ productId, id }) => (
-                  <Card key={id} productId={productId} />
+                products.map(({ id, ...restData } = {}) => (
+                  <Card key={id} product={{ id, ...restData }} />
                 ))
               )}
             </ul>
@@ -57,13 +61,17 @@ const Cart = () => {
                     <dd>
                       {isFormmatingPrice
                         ? "..."
-                        : `${localCurrency} ${convertPrice(250)}`}
+                        : `${localCurrency} ${convertPrice(subtotal)}`}
                     </dd>
                   </div>
 
                   <div className="flex justify-between">
                     <dt>Discount</dt>
-                    <dd> N / A</dd>
+                    <dd>
+                      {isFormmatingPrice
+                        ? "..."
+                        : `${localCurrency} ${convertPrice(discount)}`}
+                    </dd>
                   </div>
 
                   <div className="flex justify-between !text-base font-medium py-6">
@@ -71,7 +79,7 @@ const Cart = () => {
                     <dd className="font-semibold">
                       {isFormmatingPrice
                         ? "..."
-                        : `${localCurrency} ${convertPrice(200)}`}
+                        : `${localCurrency} ${convertPrice(total)}`}
                     </dd>
                   </div>
                 </dl>

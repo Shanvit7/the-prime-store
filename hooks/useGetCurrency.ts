@@ -47,7 +47,6 @@ const useGetCurrency = create<CurrencyState>()(
     }),
     {
       name: 'currency-storage',
-      getStorage: () => localStorage,
     }
   )
 );

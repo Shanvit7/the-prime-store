@@ -1,28 +1,35 @@
 "use client";
 
+// UTILS
 import { FC, useState, useTransition } from "react";
+// COMPONENTS
 import Image from "next/image";
 // HOOKS
-import useGetProduct from "@/hooks/useGetProduct";
 import useCart from "@/hooks/useCart";
 import useGetCurrency from "@/hooks/useGetCurrency";
 // ASSETS
 import { TrashIcon, PlusIcon, MinusIcon } from "@heroicons/react/20/solid";
 
-interface CartCardProps {
-  productId: number;
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  thumbnail: string;
 }
 
-const Card: FC<CartCardProps> = ({ productId }) => {
+interface CartCardProps {
+  product: Product;
+}
+
+
+const Card: FC<CartCardProps> = ({ product }) => {
+  const { id = 0, title = "...", price = 0, thumbnail = "" } = product ?? {};
   const { removeFromCart, updateCartItemQuantity, isProductInCart } =
     useCart() ?? {};
 
   const { localCurrency, convertPrice, isLoading } = useGetCurrency() ?? {};
 
-  const { quantity: prevQuantity = 0 } = isProductInCart(productId);
-
-  const { product: { title = "...", price = 0, thumbnail = "" } = {} } =
-    useGetProduct(productId) ?? {};
+  const { quantity: prevQuantity = 0 } = isProductInCart(id);
 
   const [quantity, setQuantity] = useState<number>(prevQuantity);
   const [isPending, startTransition] = useTransition();
@@ -30,7 +37,7 @@ const Card: FC<CartCardProps> = ({ productId }) => {
   const handleRemove = () => {
     startTransition(async () => {
       try {
-        await removeFromCart(productId);
+        await removeFromCart(id);
       } catch (error) {
         console.error("Failed to remove item from cart:", error);
       }
@@ -42,7 +49,7 @@ const Card: FC<CartCardProps> = ({ productId }) => {
       try {
         const newQuantity = quantity + 1;
         setQuantity(newQuantity);
-        await updateCartItemQuantity(productId, newQuantity);
+        await updateCartItemQuantity(id, newQuantity);
       } catch (error) {
         console.error("Failed to update item quantity:", error);
       }
@@ -54,10 +61,10 @@ const Card: FC<CartCardProps> = ({ productId }) => {
       try {
         const newQuantity = quantity - 1;
         if (newQuantity <= 0) {
-          await removeFromCart(productId);
+          await removeFromCart(id);
         } else {
           setQuantity(newQuantity);
-          await updateCartItemQuantity(productId, newQuantity);
+          await updateCartItemQuantity(id, newQuantity);
         }
       } catch (error) {
         console.error("Failed to update item quantity:", error);

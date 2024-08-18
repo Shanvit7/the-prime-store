@@ -1,6 +1,6 @@
 "use client";
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist,createJSONStorage } from 'zustand/middleware';
 import {
   getCart,
   addToCart,
@@ -78,7 +78,6 @@ const useCart = create<CartState>()(
     }),
     {
       name: 'cart-storage',
-      getStorage: () => localStorage, 
     }
   )
 );
