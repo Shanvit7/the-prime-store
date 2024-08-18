@@ -29,8 +29,8 @@ const ShopLayout = ({
   }, [initializeCart, fetchCurrencyData]);
 
   return (
-    <div className="grid grid-cols-5">
-      <div className="col-span-5">{topbar}</div>
+    <div className="relative grid grid-cols-5">
+      <div className="sticky top-0 z-50 col-span-5">{topbar}</div>
       <div className="col-span-5 justify-self-center my-8">{children}</div>
     </div>
   );

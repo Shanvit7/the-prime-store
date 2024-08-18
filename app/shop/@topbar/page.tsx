@@ -7,6 +7,7 @@ import { cn } from "@/utils";
 // COMPONENTS
 import Image from "next/image";
 import Link from "next/link";
+import Counter from "@/components/cart/counter";
 // CONSTANTS
 import { TOPBAR_TABS } from "@/utils/constants";
 
@@ -43,16 +44,16 @@ const TopBar = () => {
   }, [pathname]);
 
   return (
-    <div className="grid grid-cols-3 items-center bg-white shadow-lg p-6">
+    <div className="grid grid-cols-3 items-center bg-white shadow-lg p-4">
       {/* Logo */}
       <div className="flex justify-start items-center">
-        <Link href='/'>
-        <Image
-          src="/logo.svg"
-          alt="The Prime Store Logo"
-          width={200}
-          height={40}
-        />
+        <Link href="/">
+          <Image
+            src="/logo.svg"
+            alt="The Prime Store Logo"
+            width={200}
+            height={40}
+          />
         </Link>
       </div>
       {/* Empty column to keep grid structure */}
@@ -68,6 +69,7 @@ const TopBar = () => {
               Icon={Icon}
               key={route}
               controls={controls}
+              showCounter={route === "/shop/cart"}
             />
           ))}
         </div>
@@ -82,12 +84,14 @@ const Tab = ({
   Icon,
   onClick,
   controls,
+  showCounter,
 }: {
   text: string;
   selected: boolean;
   Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   onClick: () => void;
   controls: any;
+  showCounter: boolean;
 }) => {
   return (
     <motion.button
@@ -98,7 +102,18 @@ const Tab = ({
       )}
       animate={controls}
     >
-      <Icon className="z-10 h-5 w-5" />
+      <div className="relative flex items-center">
+        <Icon className="z-10 h-5 w-5" />
+        {showCounter && (
+          <span className="relative z-20 bottom-1 right-1">
+            <Counter
+              className={cn(
+                selected ? "bg-white text-yellow-400" : "bg-yellow-500"
+              )}
+            />
+          </span>
+        )}
+      </div>
       <p className="relative z-50">{text}</p>
       {selected && (
         <motion.span
