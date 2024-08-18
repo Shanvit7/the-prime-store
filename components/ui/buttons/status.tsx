@@ -1,9 +1,11 @@
-'use client';
+"use client";
+// UTILS
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { cn } from "@/utils";
+// ASSETS
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
-import { cn } from "@/utils";
 
 interface StatusButtonProps {
   initialText: string;
@@ -36,7 +38,9 @@ const StatusButton: React.FC<StatusButtonProps> = ({
   isError = false,
   disabled = false,
 }) => {
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
 
   useEffect(() => {
     if (isLoading) setStatus("loading");
@@ -85,11 +89,14 @@ const StatusButton: React.FC<StatusButtonProps> = ({
           {status === "error" && (
             <ErrorIcon className="h-4 w-4 fill-white stroke-red-500" />
           )}
-          
-          {status === "loading" ? loadingText :
-           status === "success" ? successText :
-           status === "error" ? errorText :
-           initialText}
+
+          {status === "loading"
+            ? loadingText
+            : status === "success"
+            ? successText
+            : status === "error"
+            ? errorText
+            : initialText}
         </motion.span>
       </AnimatePresence>
     </button>

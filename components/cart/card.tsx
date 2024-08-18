@@ -1,5 +1,4 @@
 "use client";
-
 // UTILS
 import { FC, useState, useTransition } from "react";
 // COMPONENTS
@@ -9,18 +8,12 @@ import useCart from "@/hooks/useCart";
 import useGetCurrency from "@/hooks/useGetCurrency";
 // ASSETS
 import { TrashIcon, PlusIcon, MinusIcon } from "@heroicons/react/20/solid";
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  thumbnail: string;
-}
+// TYPES
+import { type Product } from "@/utils/types";
 
 interface CartCardProps {
   product: Product;
 }
-
 
 const Card: FC<CartCardProps> = ({ product }) => {
   const { id = 0, title = "...", price = 0, thumbnail = "" } = product ?? {};

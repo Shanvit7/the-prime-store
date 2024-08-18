@@ -22,9 +22,9 @@ const Checkout = () => (
     </p>
     <Link
       href="/shop/products"
-      className="inline-flex items-center mt-6 bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-lg transition"
+      className="inline-flex items-center mt-6 bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-lg transition group"
     >
-      <ArrowLeftIcon className="h-5 w-5 mr-2" />
+      <ArrowLeftIcon className="h-5 w-5 inline-block mr-2 transition-transform duration-300 group-hover:-translate-x-1" />
       Back to Shopping
     </Link>
   </motion.div>

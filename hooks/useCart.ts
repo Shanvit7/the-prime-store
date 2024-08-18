@@ -1,6 +1,8 @@
 "use client";
+// UTILS
 import { create } from 'zustand';
-import { persist,createJSONStorage } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
+// SERVER ACTIONS
 import {
   getCart,
   addToCart,
@@ -9,7 +11,7 @@ import {
   clearCart,
   type CartItem
 } from '@/services/cart';
-
+// TYPES
 interface CartState {
   cart: CartItem[];
   initializeCart: () => Promise<void>;
@@ -18,8 +20,10 @@ interface CartState {
   updateCartItemQuantity: (productId: number, quantity: number) => Promise<void>;
   clearCart: () => Promise<void>;
   isProductInCart: (productId: number) => { inCart: boolean; quantity: number };
-}
+};
 
+
+// All cart related operation helper methods (persists in local storage, syncs with server on app initialize, data changes)
 const useCart = create<CartState>()(
   persist(
     (set, get) => ({

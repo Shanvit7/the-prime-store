@@ -1,5 +1,7 @@
 "use client";
-
+// UTILS
+import { getImageUrl } from "@/utils";
+import { useState, FC } from "react";
 // COMPONENTS
 import AddToCartButton from "@/components/cart/buttons/add";
 import RemoveFromCartButton from "@/components/cart/buttons/remove";
@@ -8,11 +10,14 @@ import Image from "next/image";
 // HOOKS
 import useCart from "@/hooks/useCart";
 import useGetCurrency from "@/hooks/useGetCurrency";
-// UTILS
-import { getImageUrl } from "@/utils";
-import { useState } from "react";
+// TYPES
+import { type Product } from "@/utils/types";
 
-const Card = ({ data = {} }) => {
+interface CardProps {
+  data: Product;
+}
+
+const Card: FC<CardProps> = ({ data }) => {
   const { isProductInCart } = useCart() ?? {};
   const { localCurrency, convertPrice, isLoading } = useGetCurrency() ?? {};
   const {
@@ -24,7 +29,9 @@ const Card = ({ data = {} }) => {
   } = data;
   const { inCart = false } = isProductInCart(productId);
 
+  // Fallback to thumbnail if images array is empty
   const defaultImage = images.length > 0 ? getImageUrl(images[0]) : thumbnail;
+  // Retriving variation images, passed as prop to VariantCircles component
   const variantImages = images?.map((img) => getImageUrl(img));
 
   const [currentImage, setCurrentImage] = useState(defaultImage);
@@ -50,6 +57,7 @@ const Card = ({ data = {} }) => {
           <div className="py-2">
             <VariantCircles
               images={variantImages}
+              title={title}
               onImageHover={setCurrentImage}
               defaultImage={defaultImage}
             />

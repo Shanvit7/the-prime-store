@@ -87,6 +87,15 @@ const PrivacyPolicy = () => (
     <p className="mt-8">
       <em>Last updated: {process.env.NEXT_PUBLIC_UPDATED_POLICY_AT}</em>
     </p>
+
+    <div className="mt-8 text-center">
+      <Link
+        href="/"
+        className="inline-block rounded-md px-6 py-3 bg-yellow-400 text-white font-semibold shadow hover:bg-yellow-500 transition-colors duration-300"
+      >
+        Back to Homepage
+      </Link>
+    </div>
   </div>
 );
 

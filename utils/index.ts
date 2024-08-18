@@ -1,7 +1,8 @@
+// UTILS
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-export const getImageUrl = (imageData: string | []) => {
+export const getImageUrl = (imageData: string | string []) => {
     if (typeof imageData === 'string') {
       try {
         // Attempt to parse the string as JSON

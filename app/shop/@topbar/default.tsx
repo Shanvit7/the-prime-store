@@ -107,7 +107,9 @@ const Tab = ({
         {showCounter && (
           <span className="relative z-20 bottom-1 right-1">
             <Counter
-              className={cn(selected ? "bg-white text-yellow-400" : "bg-yellow-500")}
+              className={cn(
+                selected ? "bg-white text-yellow-400" : "bg-yellow-500"
+              )}
             />
           </span>
         )}

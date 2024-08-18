@@ -1,18 +1,23 @@
 "use client";
 // UTILS
 import useSWR from "swr";
-// SERVICE
+// SERVICES
 import { productsApi } from "@/services/products";
-
+// CONSTANTS
+import { CART_PRODUCTS_API } from "@/utils/constants";
+// TYPES
 interface UseGetProductsOptions {
   ids?: number[];
+  select?: string;
 }
 
 const useGetCartProducts = (options: UseGetProductsOptions = {}) => {
-  const { ids } = options;
+  const { ids = [], select = "" } = options;
 
   const fetcher = async (ids: number[]) => {
-    const promises = ids.map((id) => productsApi.getProductById(id));
+    const promises = ids.map((productId) =>
+      productsApi.getProductById({ productId, select })
+    );
     return Promise.all(promises);
   };
 
@@ -21,7 +26,9 @@ const useGetCartProducts = (options: UseGetProductsOptions = {}) => {
     error,
     isLoading,
     mutate,
-  } = useSWR(ids ? ["products", ...ids] : null, () => fetcher(ids || []));
+  } = useSWR(ids ? [CART_PRODUCTS_API, ...ids] : null, () =>
+    fetcher(ids || [])
+  );
 
   return {
     products,

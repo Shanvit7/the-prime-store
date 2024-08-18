@@ -13,20 +13,22 @@ import EmptyCart from "@/components/cart/empty";
 import StatusButton from "@/components/ui/buttons/status";
 
 const Cart = () => {
-  const { cart = [], clearCart } = useCart() ?? {};
   const router = useRouter() ?? {};
+  // For simulating checkout
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
+  const { cart = [], clearCart } = useCart() ?? {};
   const ids = useMemo(() => cart.map((item) => item.productId), [cart]);
   const { products = [], isLoading: isProductLoading = true } =
-    useGetCartProducts({ ids }) ?? {};
+    useGetCartProducts({ ids, select: "title,price,thumbnail" }) ?? {};
   const {
     localCurrency,
     convertPrice,
     isLoading: isFormmatingPrice = true,
   } = useGetCurrency() ?? {};
 
+  // Billing method of cart
   const { subtotal, discount, total } = useMemo(() => {
     const subtotal = cart.reduce((acc, cartItem) => {
       const product = products.find((p) => p.id === cartItem.productId);
@@ -61,7 +63,7 @@ const Cart = () => {
       <div className="mx-auto max-w-screen-xl">
         <div className="mx-auto max-w-3xl">
           <header className="text-center">
-            <h1 className="text-xl font-bold text-gray-900 sm:text-3xl">
+            <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
               Your Cart
             </h1>
           </header>

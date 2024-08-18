@@ -1,10 +1,12 @@
 "use client";
+// UTILS
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+// SERVICES
 import { currencyApi } from '@/services/currency';
 // CONSTANTS
 import { CURRENCY_CACHE_DURATION } from '@/utils/constants';
-
+// TYPES
 interface CurrencyState {
   localCurrency: string;
   exchangeRate: number;
@@ -14,6 +16,7 @@ interface CurrencyState {
   convertPrice: (usdPrice: number) => string;
 };
 
+// Used to localize the currency based on users geo location (persists in local storage, syncs with server on app initialize, data changes)
 const useGetCurrency = create<CurrencyState>()(
   persist(
     (set, get) => ({

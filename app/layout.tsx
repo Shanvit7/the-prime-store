@@ -1,4 +1,4 @@
-// UI BASED STYLING SETUP 
+// UI BASED STYLING SETUP
 import { Lato } from "next/font/google";
 import "./globals.css";
 // TYPES

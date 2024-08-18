@@ -9,16 +9,20 @@ interface CounterProps {
   className?: string;
 }
 
+// Cart counter
 const Counter: FC<CounterProps> = ({ className }) => {
   const { cart = [] } = useCart() ?? {};
-  const totalCount = cart?.reduce((acc, item) => acc + (item?.quantity ?? 0), 0);
+  const totalCount = cart?.reduce(
+    (acc, item) => acc + (item?.quantity ?? 0),
+    0
+  );
   if (cart?.length === 0) {
     return;
   }
   return (
     <div
       className={cn(
-        "relative flex items-center justify-center w-4 h-4 rounded-full text-white font-bold text-xs",
+        "relative flex items-center justify-center w-4 h-4 rounded-full font-bold text-[0.5rem]",
         className
       )}
     >
