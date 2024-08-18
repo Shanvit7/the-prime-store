@@ -59,3 +59,60 @@ To run this project locally, follow these steps:
    ```bash
    git clone https://github.com/your-username/your-repository.git
    cd your-repository
+
+
+2. **nstall Dependencies**
+
+   ```bash
+   npm install
+
+3. **Set Up Environment Variables**
+
+   ```bash
+   cp .env.example .env.local
+
+4. **Run the Development Server**
+
+   ```bash
+   npm run dev
+
+5. **Open Your Browser**
+
+   Navigate to http://localhost:3000 to view the application
+
+## Project Structure
+
+- **`/app`**: Contains the application's layout and routing:
+  - **`/shop`**:
+    - **`/products`**: Product listing and detail pages
+    - **`/cart`**: Shopping cart management page
+    - **`@topbar`**: Top navigation bar component
+  - **`/landing`**: Landing page
+  - **`/privacy-policy`**: Privacy policy page
+
+- **`/hooks`**: Custom hooks for state management and API interactions.
+
+- **`/services`**: API-related operations and service logic.
+
+- **`/utils`**: Utility functions, including class name merging and currency formatting.
+
+- **`/components`**: Reusable UI components like `ProductCard`, `CartItem`, `Counter`.
+
+## Key Implementation Details
+
+- **State Management**: Zustand is used for managing the cart's state and currency data efficiently.
+- **Styling**: Tailwind CSS and Hyper UI components are used for responsive and modern styling.
+- **Data Fetching**: Products are fetched from dummyjson.com using custom hooks.
+- **Persistent Storage**: Vercel KV is used to maintain cart data across sessions, with synchronization on initial access and subsequent updates.
+
+## License
+This project is licensed under the terms of the [MIT License](./LICENSE). See the LICENSE file for details.
+
+## Contact
+For any questions or feedback, please reach out to shanvit.shetty@gmail.com.
+
+
+
+
+
+
