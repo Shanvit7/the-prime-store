@@ -29,7 +29,7 @@ const AddToCartButton = ({ productId }: { productId: number }) => {
 
   return (
     <StatusButton
-      initialText="Add to Cart"
+      initialText="Add to cart"
       loadingText="Adding..."
       successText="Added!"
       errorText="Failed to add to cart."

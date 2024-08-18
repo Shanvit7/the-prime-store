@@ -5,16 +5,26 @@ export const middleware = (request: NextRequest) => {
   const { pathname } = request.nextUrl;
 
   if (pathname === '/shop') {
-    // Create a new URL object for the redirection
+    // Redirect from "/shop" to "/shop/products"
     const url = new URL('/shop/products', request.url);
-    // Redirect to "/shop/products"
     return NextResponse.redirect(url);
   };
 
-  // Return a default response if no redirection is needed
+  if (pathname === '/products') {
+    // Redirect from "/product" to "/shop/products"
+    const url = new URL('/shop/products', request.url);
+    return NextResponse.redirect(url);
+  };
+
+  if (pathname === '/cart') {
+    // Redirect from "/cart" to "/shop/cart"
+    const url = new URL('/shop/cart', request.url);
+    return NextResponse.redirect(url);
+  };
+
   return NextResponse.next();
 };
 
 export const config = {
-  matcher: '/shop',  // Apply middleware only to the "/shop" route
+  matcher: ['/shop', '/products', '/cart'],  // Applying middleware to these routes
 };

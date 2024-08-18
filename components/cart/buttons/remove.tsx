@@ -29,7 +29,7 @@ const RemoveFromCartButton = ({ productId }: { productId: number }) => {
 
   return (
     <StatusButton
-      initialText="Remove from cart"
+      initialText="Remove"
       loadingText="Removing..."
       successText="Removed!"
       errorText="Failed to remove from cart."

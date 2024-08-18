@@ -90,7 +90,7 @@ const Card: FC<CartCardProps> = ({ product }) => {
         ) : (
           <>
             <p className="text-sm text-gray-600">
-              {localCurrency} {price?.toFixed(2)}
+              {localCurrency} {convertPrice(price)}
             </p>
             <p className="text-sm text-gray-600">
               Total: {localCurrency} {convertPrice(price * quantity)}
