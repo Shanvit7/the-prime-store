@@ -14,7 +14,7 @@ const EmptyCart = () => (
     </p>
     <Link
       href="/shop/products"
-      className="mt-4 inline-block rounded-md bg-yellow-400 px-5 py-3 text-sm text-white transition hover:bg-yellow-500 group"
+      className="mt-4 rounded-md flex flex-row items-center justify-center  bg-yellow-400 h-10 min-w-40 text-sm text-white transition hover:bg-yellow-500 group"
     >
       <ArrowLeftIcon className="h-5 w-5 inline-block mr-2 transition-transform duration-300 group-hover:-translate-x-1" />
       Back to Shopping

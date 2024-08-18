@@ -18,7 +18,7 @@ const Cart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-  const { cart = [], clearCart } = useCart() ?? {};
+  const { cart = [] } = useCart() ?? {};
   const ids = useMemo(() => cart.map((item) => item.productId), [cart]);
   const { products = [], isLoading: isProductLoading = true } =
     useGetCartProducts({ ids, select: "title,price,thumbnail" }) ?? {};
@@ -47,7 +47,6 @@ const Cart = () => {
     setIsLoading(true);
     // Simulate a delay for the checkout process
     setTimeout(() => {
-      clearCart(); // Clear the cart after checkout
       setIsLoading(false);
       setIsSuccess(true);
       router.push("/shop/cart/checkout-success");
