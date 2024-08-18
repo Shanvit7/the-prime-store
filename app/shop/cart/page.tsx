@@ -8,6 +8,7 @@ import useGetCurrency from "@/hooks/useGetCurrency";
 // COMPONENTS
 import Card from "@/components/cart/card";
 import LoadingSkeletonGroup from "@/components/cart/skeleton-group";
+import EmptyCart from "@/components/cart/empty";
 import Link from "next/link";
 
 const Cart = () => {
@@ -32,6 +33,12 @@ const Cart = () => {
 
     return { subtotal, discount, total };
   }, [cart, products]);
+
+  const isEmpty = cart?.length === 0;
+
+  if(isEmpty){
+    return <EmptyCart />
+  };
 
   return (
     <section className="bg-white shadow-2xl">
