@@ -53,7 +53,7 @@ export const addToCart = async (productId: number, quantity: number): Promise<Ca
   }
 
   await kv.set(getCartKey(cartId), cart);
-  revalidatePath('/cart');
+  revalidatePath('/shop/cart');
   return cart;
 };
 
@@ -62,7 +62,7 @@ export const removeFromCart = async (productId: number): Promise<CartItem[]> => 
   const cart = await getCart();
   const updatedCart = cart.filter(item => item.productId !== productId);
   await kv.set(getCartKey(cartId), updatedCart);
-  revalidatePath('/cart');
+  revalidatePath('/shop/cart');
   return updatedCart;
 };
 
@@ -76,12 +76,12 @@ export const updateCartItemQuantity = async (productId: number, quantity: number
     await kv.set(getCartKey(cartId), cart);
   }
 
-  revalidatePath('/cart');
+  revalidatePath('/shop/cart');
   return cart;
 };
 
 export const clearCart = async (): Promise<void> => {
   const cartId = getCartId();
   await kv.del(getCartKey(cartId));
-  revalidatePath('/cart');
+  revalidatePath('/shop/cart');
 };

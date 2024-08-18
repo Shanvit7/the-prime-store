@@ -7,6 +7,6 @@ export const PRODUCT_API = '/api/product';
 
 // UI BASED
 export const TOPBAR_TABS = [
-    { text: "Products", route: "/products", Icon: ShoppingBagIcon },
-    { text: "Cart", route: "/cart", Icon: ShoppingCartIcon },
+    { text: "Products", route: "/shop/products", Icon: ShoppingBagIcon },
+    { text: "Cart", route: "/shop/cart", Icon: ShoppingCartIcon },
 ];

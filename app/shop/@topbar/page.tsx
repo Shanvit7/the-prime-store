@@ -46,7 +46,7 @@ const TopBar = () => {
     <div className="grid grid-cols-3 items-center bg-white shadow-lg p-6">
       {/* Logo */}
       <div className="flex justify-start items-center">
-      <Link href='/'>
+        <Link href='/'>
         <Image
           src="/logo.svg"
           alt="The Prime Store Logo"
@@ -112,4 +112,3 @@ const Tab = ({
 };
 
 export default TopBar;
-

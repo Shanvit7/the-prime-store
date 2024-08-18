@@ -7,7 +7,7 @@ import useGetCurrency from "@/hooks/useGetCurrency";
 // TYPES
 import { type ReactNode } from "react";
 
-const StandardLayout = ({
+const ShopLayout = ({
   topbar,
   children,
 }: Readonly<{
@@ -36,4 +36,4 @@ const StandardLayout = ({
   );
 };
 
-export default StandardLayout;
+export default ShopLayout;
