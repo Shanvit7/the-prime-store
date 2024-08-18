@@ -6,13 +6,14 @@ import { productsApi } from "@/services/products";
 // CONSTANTS
 import { PRODUCT_API } from "@/utils/constants";
 
-const useGetProduct = (productId : number ) => {
+// This hook is not used anywhere, for future feature additions
+const useGetProduct = (productId: number) => {
     const {
       data: product = {},
       error,
       isLoading = true,
       mutate,
-    } = useSWR(`${PRODUCT_API}/${productId}`,async () => productsApi.getProductById(productId));
+    } = useSWR(`${PRODUCT_API}/${productId}`,async () => productsApi.getProductById({ productId }));
     return {
       product,
       isLoading,

@@ -1,4 +1,5 @@
 "use client";
+// UTILS
 import { useState, useTransition } from "react";
 // COMPONENTS
 import StatusButton from "@/components/ui/buttons/status";
@@ -10,6 +11,7 @@ import { ShoppingCartIcon } from "@heroicons/react/20/solid";
 const RemoveFromCartButton = ({ productId }: { productId: number }) => {
   const { removeFromCart } = useCart() ?? {};
 
+  // Transition hook used for better UX & error handling (graceful fallback)
   const [isPending, startTransition] = useTransition();
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -29,7 +31,7 @@ const RemoveFromCartButton = ({ productId }: { productId: number }) => {
 
   return (
     <StatusButton
-      initialText="Remove from cart"
+      initialText="Remove"
       loadingText="Removing..."
       successText="Removed!"
       errorText="Failed to remove from cart."

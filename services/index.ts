@@ -1,3 +1,4 @@
+// BASE SERVICE (UNDER THE HOOD FOR FETCH REQUESTS)
 interface ApiServiceConfig extends RequestInit {
   headers?: HeadersInit;
 }

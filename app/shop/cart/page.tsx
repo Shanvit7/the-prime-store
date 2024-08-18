@@ -1,6 +1,7 @@
 "use client";
 // UTILS
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 // HOOKS
 import useCart from "@/hooks/useCart";
 import useGetCartProducts from "@/hooks/useGetCartProducts";
@@ -8,19 +9,26 @@ import useGetCurrency from "@/hooks/useGetCurrency";
 // COMPONENTS
 import Card from "@/components/cart/card";
 import LoadingSkeletonGroup from "@/components/cart/skeleton-group";
-import Link from "next/link";
+import EmptyCart from "@/components/cart/empty";
+import StatusButton from "@/components/ui/buttons/status";
 
 const Cart = () => {
-  const { cart = [] } = useCart() ?? {};
+  const router = useRouter() ?? {};
+  // For simulating checkout
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+
+  const { cart = [], clearCart } = useCart() ?? {};
   const ids = useMemo(() => cart.map((item) => item.productId), [cart]);
-  const { products = [], isLoading = true } = useGetCartProducts({ ids }) ?? {};
+  const { products = [], isLoading: isProductLoading = true } =
+    useGetCartProducts({ ids, select: "title,price,thumbnail" }) ?? {};
   const {
     localCurrency,
     convertPrice,
     isLoading: isFormmatingPrice = true,
   } = useGetCurrency() ?? {};
 
-  // Billing logic
+  // Billing method of cart
   const { subtotal, discount, total } = useMemo(() => {
     const subtotal = cart.reduce((acc, cartItem) => {
       const product = products.find((p) => p.id === cartItem.productId);
@@ -33,19 +41,36 @@ const Cart = () => {
     return { subtotal, discount, total };
   }, [cart, products]);
 
+  const isEmpty = cart?.length === 0;
+
+  const handleCheckout = () => {
+    setIsLoading(true);
+    // Simulate a delay for the checkout process
+    setTimeout(() => {
+      clearCart(); // Clear the cart after checkout
+      setIsLoading(false);
+      setIsSuccess(true);
+      router.push("/shop/cart/checkout-success");
+    }, 2000);
+  };
+
+  if (isEmpty) {
+    return <EmptyCart />;
+  }
+
   return (
-    <section className="bg-white shadow-2xl">
-      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+    <section className="bg-white shadow-2xl p-4 sm:p-8">
+      <div className="mx-auto max-w-screen-xl">
         <div className="mx-auto max-w-3xl">
           <header className="text-center">
-            <h1 className="text-xl font-bold text-gray-900 sm:text-3xl">
+            <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
               Your Cart
             </h1>
           </header>
 
           <div className="mt-8">
             <ul className="space-y-4">
-              {isLoading ? (
+              {isProductLoading ? (
                 <LoadingSkeletonGroup />
               ) : (
                 products.map(({ id, ...restData } = {}) => (
@@ -85,12 +110,16 @@ const Cart = () => {
                 </dl>
 
                 <div className="flex justify-end">
-                  <Link
-                    href="/checkout"
-                    className="block rounded bg-yellow-400 px-5 py-3 text-sm text-white transition hover:bg-yellow-500"
-                  >
-                    Checkout
-                  </Link>
+                  <StatusButton
+                    initialText="Checkout"
+                    loadingText="Processing..."
+                    successText="Order Placed!"
+                    errorText="Failed"
+                    onClick={handleCheckout}
+                    isLoading={isLoading}
+                    isSuccess={isSuccess}
+                    className="min-w-32"
+                  />
                 </div>
               </div>
             </div>

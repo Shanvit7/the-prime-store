@@ -1,15 +1,17 @@
 "use server";
+// UTILS
 import { cookies } from 'next/headers';
 import { kv } from '@vercel/kv';
 import { nanoid } from 'nanoid';
 import { revalidatePath } from 'next/cache';
-
+// TYPES
 export interface CartItem {
   id: string;
   productId: number;
   quantity: number;
 }
 
+// VERCEL KV based server actions (** Use with caution as server calls are expensive / daily limit: 3000)
 const getCartId = (): string => {
   const cookieStore = cookies();
   let cartId = cookieStore.get('cartId')?.value;
@@ -54,6 +56,7 @@ export const addToCart = async (productId: number, quantity: number): Promise<Ca
 
   await kv.set(getCartKey(cartId), cart);
   revalidatePath('/shop/cart');
+  revalidatePath('/shop/products');
   return cart;
 };
 
@@ -63,6 +66,7 @@ export const removeFromCart = async (productId: number): Promise<CartItem[]> => 
   const updatedCart = cart.filter(item => item.productId !== productId);
   await kv.set(getCartKey(cartId), updatedCart);
   revalidatePath('/shop/cart');
+  revalidatePath('/shop/products');
   return updatedCart;
 };
 
@@ -74,14 +78,16 @@ export const updateCartItemQuantity = async (productId: number, quantity: number
   if (itemIndex > -1) {
     cart[itemIndex].quantity = quantity;
     await kv.set(getCartKey(cartId), cart);
-  }
-
+  };
   revalidatePath('/shop/cart');
+  revalidatePath('/shop/products');
   return cart;
+
 };
 
 export const clearCart = async (): Promise<void> => {
   const cartId = getCartId();
   await kv.del(getCartKey(cartId));
   revalidatePath('/shop/cart');
+  revalidatePath('/shop/products');
 };
