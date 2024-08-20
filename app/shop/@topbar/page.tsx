@@ -51,6 +51,7 @@ const TopBar = () => {
           <Image
             src="/logo.svg"
             alt="The Prime Store Logo"
+            priority
             width={200}
             height={40}
           />

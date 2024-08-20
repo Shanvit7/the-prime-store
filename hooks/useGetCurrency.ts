@@ -31,7 +31,6 @@ const useGetCurrency = create<CurrencyState>()(
 
         // Check if cached data is still valid
         if (localCurrency !== 'USD' && exchangeRate !== 1 && (now - lastUpdated) < CURRENCY_CACHE_DURATION) {
-          console.log('Using cached currency data');
           return;
         }
 

@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Allow crawling of product pages
+Allow: /shop/products/
+
+# Allow crawling of landing page
+Allow: /
+
+# Allow crawling of privacy policy
+Allow: /privacy-policy
+
+# Disallow crawling of cart pages
+Disallow: /shop/cart/
+
+
+# Sitemap location
+Sitemap: https://the-prime-store.vercel.app/sitemap.xml

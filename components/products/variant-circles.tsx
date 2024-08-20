@@ -23,15 +23,15 @@ const VariantCircles: FC<VariantCirclesProps> = ({
       images.map((src, index) => (
         <div
           key={index}
-          className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border-2 border-gray-300 cursor-pointer hover:border-gray-500 transition-colors duration-300"
+          className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex-shrink-0 rounded-full border-2 border-gray-300 cursor-pointer hover:border-gray-500 transition-colors duration-300"
           onMouseEnter={() => onImageHover(src)}
         >
           <Image
             src={src}
-            alt={title}
-            className="w-full h-full object-cover rounded-full"
-            layout="fill"
-            objectFit="cover"
+            alt={`${title} variant ${index + 1}`}
+            className="object-cover rounded-full"
+            fill
+            sizes="(max-width: 640px) 32px, (max-width: 768px) 40px, 48px"
           />
         </div>
       ))
@@ -43,9 +43,9 @@ const VariantCircles: FC<VariantCirclesProps> = ({
         <Image
           src={defaultImage}
           alt={title}
-          className="w-full h-full object-cover rounded-full"
-          layout="fill"
-          objectFit="cover"
+          className="object-cover rounded-full"
+          fill
+          sizes="(max-width: 640px) 32px, (max-width: 768px) 40px, 48px"
         />
       </div>
     )}
