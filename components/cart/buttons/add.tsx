@@ -41,6 +41,7 @@ const AddToCartButton = ({ productId }: { productId: number }) => {
       isSuccess={isSuccess}
       isError={isError}
       disabled={isPending}
+      dataCy="add-to-cart-button"
     />
   );
 };

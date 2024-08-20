@@ -53,6 +53,7 @@ const TopBar = () => {
             alt="The Prime Store Logo"
             width={200}
             height={40}
+            priority
           />
         </Link>
       </div>

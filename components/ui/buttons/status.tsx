@@ -21,6 +21,7 @@ interface StatusButtonProps {
   isSuccess?: boolean;
   isError?: boolean;
   disabled?: boolean;
+  dataCy?: string;
 }
 
 const StatusButton: React.FC<StatusButtonProps> = ({
@@ -37,6 +38,7 @@ const StatusButton: React.FC<StatusButtonProps> = ({
   isSuccess = false,
   isError = false,
   disabled = false,
+  dataCy = '',
 }) => {
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -63,6 +65,7 @@ const StatusButton: React.FC<StatusButtonProps> = ({
         "group relative h-8 min-w-20 overflow-hidden rounded-md bg-yellow-400 px-6 text-sm font-semibold text-white transition-colors duration-300 hover:bg-yellow-500 disabled:bg-gray-300 disabled:cursor-not-allowed",
         className
       )}
+      data-cy={dataCy}
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span

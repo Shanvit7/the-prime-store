@@ -36,7 +36,7 @@ const Skeleton = () => {
 
 const LoadingSkeletonGroup = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-8">
+    <div data-cy="product-loading-skeleton" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-8">
       {[...Array(9)].map((_, index) => (
         <Skeleton key={index} />
       ))}
