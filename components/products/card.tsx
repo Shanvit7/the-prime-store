@@ -38,7 +38,7 @@ const Card: FC<CardProps> = ({ data }) => {
   const localPrice = isLoading ? "..." : convertPrice(price);
 
   return (
-    <div className="relative flex flex-col h-full overflow-hidden rounded-lg shadow-xl group">
+    <div data-cy="product-card" className="relative flex flex-col h-full overflow-hidden rounded-lg shadow-xl group">
       <div className="relative bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 overflow-hidden rounded-t-lg h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72">
         <Image
           src={currentImage}
@@ -46,12 +46,13 @@ const Card: FC<CardProps> = ({ data }) => {
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
           layout="fill"
           objectFit="cover"
+          data-cy="product-image"
         />
       </div>
 
       <div className="relative flex flex-col flex-grow bg-white border-t border-gray-200 rounded-b-lg">
         <div className="p-4 flex flex-col flex-grow">
-          <h3 className="text-base font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
+          <h3 data-cy="product-title" className="text-base font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
             {title}
           </h3>
           <div className="py-2">
@@ -67,14 +68,14 @@ const Card: FC<CardProps> = ({ data }) => {
         </div>
 
         <div className="p-4 bg-white border-t border-gray-200 rounded-b-lg flex flex-row items-center justify-between">
-          <p className="text-base text-gray-700">
+          <p data-cy="product-price" className="text-base text-gray-700">
             {localCurrency} {localPrice}
           </p>
           <div className="mt-2 flex items-center space-x-2">
             {inCart ? (
               <RemoveFromCartButton productId={productId} />
             ) : (
-              <AddToCartButton productId={productId} />
+              <AddToCartButton productId={productId} data-cy="add-to-cart-button" />
             )}
           </div>
         </div>

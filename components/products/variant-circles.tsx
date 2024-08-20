@@ -18,7 +18,7 @@ const VariantCircles: FC<VariantCirclesProps> = ({
   onImageHover,
   defaultImage,
 }) => (
-  <div className="flex overflow-x-auto py-2 space-x-2">
+  <div data-cy="variant-circles" className="flex overflow-x-auto py-2 space-x-2">
     {images.length > 0 ? (
       images.map((src, index) => (
         <div

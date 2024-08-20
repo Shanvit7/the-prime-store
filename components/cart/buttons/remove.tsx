@@ -41,6 +41,7 @@ const RemoveFromCartButton = ({ productId }: { productId: number }) => {
       isSuccess={isSuccess}
       isError={isError}
       disabled={isPending}
+      dataCy="remove-from-cart-button"
     />
   );
 };
