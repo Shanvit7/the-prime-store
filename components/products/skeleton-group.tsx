@@ -34,7 +34,7 @@ const Skeleton = () => {
   );
 };
 
-const LoadingSkeletonGroup = () => {
+const SkeletonProductGrid = () => {
   return (
     <div data-cy="product-loading-skeleton" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-8">
       {[...Array(9)].map((_, index) => (
@@ -44,4 +44,54 @@ const LoadingSkeletonGroup = () => {
   );
 };
 
-export default LoadingSkeletonGroup;
+
+const ProductSkeleton = () => (
+    <main className="w-svw px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 animate-pulse">
+      <section className="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="md:flex">
+          <div className="md:w-1/2 relative">
+            <div className="bg-gray-300 h-64 md:h-full"></div>
+          </div>
+          
+          <div className="md:w-1/2 p-6">
+            <div className="h-8 bg-gray-300 rounded w-3/4 mb-4"></div>
+            <div className="h-4 bg-gray-300 rounded w-1/4 mb-4"></div>
+            <div className="flex items-center mb-4">
+              <div className="h-4 bg-gray-300 rounded w-24 mr-2"></div>
+              <div className="h-4 bg-gray-300 rounded w-8"></div>
+            </div>
+            <div className="h-6 bg-gray-300 rounded w-1/4 mb-4"></div>
+            <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
+            <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
+            <div className="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
+            <div className="h-10 bg-gray-300 rounded w-1/2"></div>
+          </div>
+        </div>
+      </section>
+      
+      <section className="mt-8">
+        <div className="h-8 bg-gray-300 rounded w-1/4 mb-4"></div>
+        <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
+        <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
+        <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+      </section>
+      
+      <section className="mt-8">
+        <div className="h-8 bg-gray-300 rounded w-1/4 mb-4"></div>
+        <div className="space-y-4">
+          {[...Array(3)].map((_, index) => (
+            <div key={index} className="flex items-start space-x-4">
+              <div className="h-10 w-10 bg-gray-300 rounded-full"></div>
+              <div className="flex-1">
+                <div className="h-4 bg-gray-300 rounded w-1/4 mb-2"></div>
+                <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
+                <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
+);
+
+export { SkeletonProductGrid, ProductSkeleton };

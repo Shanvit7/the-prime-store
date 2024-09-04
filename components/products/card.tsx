@@ -2,6 +2,7 @@
 // UTILS
 import { getImageUrl } from "@/utils";
 import { useState, FC } from "react";
+import Link from "next/link";
 // COMPONENTS
 import AddToCartButton from "@/components/cart/buttons/add";
 import RemoveFromCartButton from "@/components/cart/buttons/remove";
@@ -38,8 +39,11 @@ const Card: FC<CardProps> = ({ data }) => {
   const localPrice = isLoading ? "..." : convertPrice(price);
 
   return (
-    <div data-cy="product-card" className="relative flex flex-col h-full overflow-hidden rounded-lg shadow-xl group">
-    <div className="relative bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 overflow-hidden rounded-t-lg h-48 sm:h-56 md:h-64">
+    <div
+      data-cy="product-card"
+      className="relative flex flex-col h-full overflow-hidden rounded-lg shadow-xl group"
+    >
+      <div className="relative bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 overflow-hidden rounded-t-lg h-48 sm:h-56 md:h-64">
         <Image
           src={currentImage}
           alt={title}
@@ -53,9 +57,14 @@ const Card: FC<CardProps> = ({ data }) => {
 
       <div className="relative flex flex-col flex-grow bg-white border-t border-gray-200 rounded-b-lg">
         <div className="p-4 flex flex-col flex-grow">
-          <h3 data-cy="product-title" className="text-base font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
-            {title}
-          </h3>
+          <Link href={`/shop/products/${productId}`}>
+            <h3
+              data-cy="product-title"
+              className="text-base font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4"
+            >
+              {title}
+            </h3>
+          </Link>
           <div className="py-2">
             <VariantCircles
               images={variantImages}
@@ -76,7 +85,10 @@ const Card: FC<CardProps> = ({ data }) => {
             {inCart ? (
               <RemoveFromCartButton productId={productId} />
             ) : (
-              <AddToCartButton productId={productId} data-cy="add-to-cart-button" />
+              <AddToCartButton
+                productId={productId}
+                data-cy="add-to-cart-button"
+              />
             )}
           </div>
         </div>

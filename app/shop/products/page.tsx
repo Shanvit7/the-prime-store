@@ -2,7 +2,7 @@
 // COMPONENTS
 import Card from "@/components/products/card";
 import NoProducts from "@/components/products/empty";
-import LoadingSkeletonGroup from "@/components/products/skeleton-group";
+import { SkeletonProductGrid } from "@/components/products/skeleton-group";
 // HOOKS
 import useGetProducts from "@/hooks/useGetProducts";
 // TYPES
@@ -18,7 +18,7 @@ const Products = () => {
   const isEmpty = products?.length === 0;
 
   if (isLoading) {
-    return <LoadingSkeletonGroup />;
+    return <SkeletonProductGrid />;
   }
 
   if (isEmpty) {

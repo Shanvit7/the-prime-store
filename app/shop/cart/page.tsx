@@ -8,7 +8,7 @@ import useGetCartProducts from "@/hooks/useGetCartProducts";
 import useGetCurrency from "@/hooks/useGetCurrency";
 // COMPONENTS
 import Card from "@/components/cart/card";
-import LoadingSkeletonGroup from "@/components/cart/skeleton-group";
+import  LoadingSkeletonGroup from "@/components/cart/skeleton-group";
 import EmptyCart from "@/components/cart/empty";
 import StatusButton from "@/components/ui/buttons/status";
 
