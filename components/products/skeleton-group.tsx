@@ -34,64 +34,102 @@ const Skeleton = () => {
   );
 };
 
-const SkeletonProductGrid = () => {
-  return (
-    <div data-cy="product-loading-skeleton" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-8">
-      {[...Array(9)].map((_, index) => (
-        <Skeleton key={index} />
-      ))}
-    </div>
-  );
-};
-
-
-const ProductSkeleton = () => (
-    <main className="w-svw px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 animate-pulse">
-      <section className="bg-white shadow-lg rounded-lg overflow-hidden">
-        <div className="md:flex">
-          <div className="md:w-1/2 relative">
-            <div className="bg-gray-300 h-64 md:h-full"></div>
-          </div>
-          
-          <div className="md:w-1/2 p-6">
-            <div className="h-8 bg-gray-300 rounded w-3/4 mb-4"></div>
-            <div className="h-4 bg-gray-300 rounded w-1/4 mb-4"></div>
-            <div className="flex items-center mb-4">
-              <div className="h-4 bg-gray-300 rounded w-24 mr-2"></div>
-              <div className="h-4 bg-gray-300 rounded w-8"></div>
-            </div>
-            <div className="h-6 bg-gray-300 rounded w-1/4 mb-4"></div>
-            <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-            <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-            <div className="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
-            <div className="h-10 bg-gray-300 rounded w-1/2"></div>
-          </div>
-        </div>
-      </section>
-      
-      <section className="mt-8">
-        <div className="h-8 bg-gray-300 rounded w-1/4 mb-4"></div>
-        <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-        <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-        <div className="h-4 bg-gray-300 rounded w-3/4"></div>
-      </section>
-      
-      <section className="mt-8">
-        <div className="h-8 bg-gray-300 rounded w-1/4 mb-4"></div>
-        <div className="space-y-4">
-          {[...Array(3)].map((_, index) => (
-            <div key={index} className="flex items-start space-x-4">
-              <div className="h-10 w-10 bg-gray-300 rounded-full"></div>
-              <div className="flex-1">
-                <div className="h-4 bg-gray-300 rounded w-1/4 mb-2"></div>
-                <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-                <div className="h-4 bg-gray-300 rounded w-3/4"></div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </main>
+const ProductGridSkeleton = () => (
+  <div
+    data-cy="product-loading-skeleton"
+    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-8"
+  >
+    {[...Array(9)].map((_, index) => (
+      <Skeleton key={index} />
+    ))}
+  </div>
 );
 
-export { SkeletonProductGrid, ProductSkeleton };
+const ProductSkeleton = () => (
+  <main className="w-svw px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 animate-pulse">
+    <section className="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="md:flex">
+        <div className="md:w-1/2 relative">
+          <div className="bg-gray-300 h-64 md:h-full"></div>
+        </div>
+
+        <div className="md:w-1/2 p-6">
+          <div className="h-8 bg-gray-300 rounded w-3/4 mb-4"></div>
+          <div className="h-4 bg-gray-300 rounded w-1/4 mb-4"></div>
+          <div className="flex items-center mb-4">
+            <div className="h-4 bg-gray-300 rounded w-24 mr-2"></div>
+            <div className="h-4 bg-gray-300 rounded w-8"></div>
+          </div>
+          <div className="h-6 bg-gray-300 rounded w-1/4 mb-4"></div>
+          <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
+          <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
+          <div className="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
+          <div className="h-10 bg-gray-300 rounded w-1/2"></div>
+        </div>
+      </div>
+    </section>
+
+    <section className="mt-8">
+      <div className="h-8 bg-gray-300 rounded w-1/4 mb-4"></div>
+      <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
+      <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
+      <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+    </section>
+
+    <section className="mt-8">
+      <div className="h-8 bg-gray-300 rounded w-1/4 mb-4"></div>
+      <div className="space-y-4">
+        {[...Array(3)].map((_, index) => (
+          <div key={index} className="flex items-start space-x-4">
+            <div className="h-10 w-10 bg-gray-300 rounded-full"></div>
+            <div className="flex-1">
+              <div className="h-4 bg-gray-300 rounded w-1/4 mb-2"></div>
+              <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
+              <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+);
+
+const ProductPreviewSkeleton = () => (
+  <div className="flex items-center justify-center z-50 w-[50vw]">
+    <div className="bg-white rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="absolute top-4 right-4 w-5 h-5 bg-gray-200 rounded-full"></div>
+      <div className="flex flex-col md:flex-row gap-6">
+        <div className="relative h-64 md:h-80 md:w-1/2 bg-gray-200 rounded animate-pulse"></div>
+        <div className="md:w-1/2 space-y-4">
+          <div className="h-8 bg-gray-200 rounded w-3/4 animate-pulse"></div>
+          <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+          <div className="flex items-center space-x-2">
+            <div className="h-4 bg-gray-200 rounded w-24 animate-pulse"></div>
+            <div className="h-4 bg-gray-200 rounded w-8 animate-pulse"></div>
+          </div>
+          <div className="h-6 bg-gray-200 rounded w-1/3 animate-pulse"></div>
+          <div className="flex space-x-2">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="w-8 h-8 bg-gray-200 rounded-full animate-pulse"
+              ></div>
+            ))}
+          </div>
+          <div className="space-y-2">
+            <div className="h-4 bg-gray-200 rounded w-full animate-pulse"></div>
+            <div className="h-4 bg-gray-200 rounded w-full animate-pulse"></div>
+            <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse"></div>
+          </div>
+          <div className="flex space-x-2">
+            <div className="h-10 bg-gray-200 rounded w-1/3 animate-pulse"></div>
+            <div className="h-10 bg-gray-200 rounded w-1/3 animate-pulse"></div>
+          </div>
+          <div className="h-4 bg-gray-200 rounded w-1/4 animate-pulse"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export { ProductGridSkeleton, ProductSkeleton, ProductPreviewSkeleton };

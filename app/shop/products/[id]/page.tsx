@@ -55,7 +55,7 @@ const Product = ({ params }: { params: { id: number } }) => {
   };
 
   return (
-    <main className="w-svw px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+    <main className="container px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
       <section className="bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="md:flex">
           <div className="relative h-[50vh] md:h-auto md:w-1/2">
@@ -103,7 +103,7 @@ const Product = ({ params }: { params: { id: number } }) => {
         <Details {...product} />
       </section>
 
-      <section>
+      <section id="reviews">
         <Reviews reviews={reviews} />
       </section>
     </main>
