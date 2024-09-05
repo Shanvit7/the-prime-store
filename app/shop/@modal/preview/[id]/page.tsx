@@ -122,7 +122,6 @@ const ProductPreview = ({ params }: { params: { id: number } }) => {
                 </Link>
               </div>
               <Link
-                replace
                 href={`/shop/products/${id}#reviews`}
                 className="text-blue-600 hover:underline"
               >
