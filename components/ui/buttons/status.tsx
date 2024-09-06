@@ -1,6 +1,6 @@
 "use client";
 // UTILS
-import { useState, useEffect } from "react";
+import { useState, useEffect, MouseEvent, MouseEventHandler } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/utils";
 // ASSETS
@@ -51,10 +51,11 @@ const StatusButton: React.FC<StatusButtonProps> = ({
     else setStatus("idle");
   }, [isLoading, isSuccess, isError]);
 
-  const handleClick = () => {
+  const handleClick : MouseEventHandler = (e: MouseEvent) => {
+    e.stopPropagation();
     if (!disabled && !isLoading && onClick) {
       onClick();
-    }
+    };
   };
 
   return (

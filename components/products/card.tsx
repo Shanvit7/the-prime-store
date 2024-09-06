@@ -57,7 +57,7 @@ const Card: FC<CardProps> = ({ data }) => {
 
       <div className="relative flex flex-col flex-grow bg-white border-t border-gray-200 rounded-b-lg">
         <div className="p-4 flex flex-col flex-grow">
-          <Link href={`/shop/preview/${productId}`}>
+          <Link data-cy="product-title-link" href={`/shop/preview/${productId}`}>
             <h3
               data-cy="product-title"
               className="text-base font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4"
@@ -87,7 +87,6 @@ const Card: FC<CardProps> = ({ data }) => {
             ) : (
               <AddToCartButton
                 productId={productId}
-                data-cy="add-to-cart-button"
               />
             )}
           </div>

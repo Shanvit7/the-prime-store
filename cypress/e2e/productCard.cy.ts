@@ -35,6 +35,7 @@ describe('Product Card Component', () => {
         cy.get('[data-cy=add-to-cart-button]').should('be.visible'); // Ensure add button becomes visible again
       });
     });
+    
   });
   
   

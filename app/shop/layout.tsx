@@ -37,7 +37,7 @@ const ShopLayout = ({
         <div className="col-span-5 justify-self-center my-8">{children}</div>
       </div>
       {showModal && modal}
-      <div id="modal-root" />
+      <div className="fixed" id="modal-root" />
     </>
   );
 };

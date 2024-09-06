@@ -16,15 +16,16 @@ import useGetProduct from "@/hooks/useGetProduct";
 import useCart from "@/hooks/useCart";
 import useGetCurrency from "@/hooks/useGetCurrency";
 
-const Product = ({ params }: { params: { id: number } }) => {
+const Product = ({ params }: { params: { id: string } }) => {
   const { id } = params ?? {};
+  const productId = Number(id);
   const { isProductInCart } = useCart() ?? {};
-  const { inCart = false } = isProductInCart(id);
+  const { inCart = false } = isProductInCart(productId);
   const {
     product = {},
     isLoading = true,
     isError = false,
-  } = useGetProduct(id) ?? {};
+  } = useGetProduct(productId) ?? {};
   const {
     brand = "...",
     title = "...",
@@ -52,7 +53,7 @@ const Product = ({ params }: { params: { id: number } }) => {
 
   if (isLoading) {
     return <ProductSkeleton />;
-  };
+  }
 
   return (
     <main className="container px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
@@ -91,9 +92,9 @@ const Product = ({ params }: { params: { id: number } }) => {
             </p>
             <p className="text-gray-700 mb-4">{description}</p>
             {inCart ? (
-              <RemoveFromCartButton productId={id} />
+              <RemoveFromCartButton productId={productId} />
             ) : (
-              <AddToCartButton productId={id} data-cy="add-to-cart-button" />
+              <AddToCartButton productId={productId} />
             )}
           </div>
         </div>
