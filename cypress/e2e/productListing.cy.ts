@@ -3,7 +3,7 @@ const productApiUrl = Cypress.env('productApiUrl');
 const productListingLimit = Cypress.env('productListingLimit');
 describe('Product Listing Page', () => {
   beforeEach(() => {
-    // Navigate to the product listing page
+    // Navigating to the product listing page
     cy.visit('/shop/products');
   });
 

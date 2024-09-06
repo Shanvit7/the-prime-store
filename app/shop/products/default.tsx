@@ -10,15 +10,18 @@ import useGetProducts from "@/hooks/useGetProducts";
 import { type Product } from "@/utils/types";
 
 const Products = () => {
-  const { products = [], isLoading = true, isError = false } =
-    useGetProducts({
-      limit: parseInt(process.env.NEXT_PUBLIC_PRODUCT_LIMIT as string) || 20,
-      select: "id,title,price,thumbnail,images",
-    }) ?? {};
+  const {
+    products = [],
+    isLoading = true,
+    isError = false,
+  } = useGetProducts({
+    limit: parseInt(process.env.NEXT_PUBLIC_PRODUCT_LIMIT as string) || 20,
+    select: "id,title,price,thumbnail,images",
+  }) ?? {};
 
   const isEmpty = products?.length === 0;
 
-  if(isError) return <ProductsError />;
+  if (isError) return <ProductsError />;
   if (isLoading) return <ProductGridSkeleton />;
   if (isEmpty) return <NoProducts />;
 

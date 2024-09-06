@@ -65,7 +65,7 @@ const TopBar = () => {
           {TOPBAR_TABS.map(({ text, Icon, route }) => (
             <Tab
               text={text}
-              selected={selectedRoute === route}
+              selected={selectedRoute.startsWith(route)}
               onClick={handleTabClick(route)}
               Icon={Icon}
               key={route}

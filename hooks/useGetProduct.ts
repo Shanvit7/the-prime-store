@@ -6,7 +6,6 @@ import { productsApi } from "@/services/products";
 // CONSTANTS
 import { PRODUCT_API } from "@/utils/constants";
 
-// This hook is not used anywhere, for future feature additions
 const useGetProduct = (productId: number) => {
     const {
       data: product = {},

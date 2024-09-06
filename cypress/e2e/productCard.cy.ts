@@ -1,6 +1,6 @@
 describe('Product Card Component', () => {
     beforeEach(() => {
-      // Visit the product listing page
+      // Visiting the product listing page
       cy.visit('/shop/products');
     });
   
@@ -35,6 +35,7 @@ describe('Product Card Component', () => {
         cy.get('[data-cy=add-to-cart-button]').should('be.visible'); // Ensure add button becomes visible again
       });
     });
+    
   });
   
   
