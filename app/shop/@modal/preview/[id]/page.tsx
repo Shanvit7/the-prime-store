@@ -12,12 +12,13 @@ import VariantCircles from "@/components/products/variant-circles";
 import AddToCartButton from "@/components/cart/buttons/add";
 import RemoveFromCartButton from "@/components/cart/buttons/remove";
 import { ProductPreviewSkeleton } from "@/components/products/skeleton-group";
+import ProductsError from "@/components/products/error";
 // HOOKS
 import useGetProduct from "@/hooks/useGetProduct";
 import useCart from "@/hooks/useCart";
 import useGetCurrency from "@/hooks/useGetCurrency";
 // ASSETS
-import { XMarkIcon } from "@heroicons/react/20/solid";
+import { XMarkIcon, ExclamationCircleIcon } from "@heroicons/react/20/solid";
 
 const ProductPreview = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
@@ -67,7 +68,20 @@ const ProductPreview = ({ params }: { params: { id: string } }) => {
         <ProductPreviewSkeleton />
       </Modal>
     );
-  }
+  };
+
+  if (isError) {
+    return (
+      <Modal>
+        <div
+          data-cy="product-modal"
+          className="flex items-center justify-center z-50"
+        >
+          <ProductsError />
+        </div>
+      </Modal>
+    );
+  };
 
   return (
     <Modal>
