@@ -118,6 +118,7 @@ const Cart = () => {
                     isLoading={isLoading}
                     isSuccess={isSuccess}
                     className="min-w-32"
+                    dataCy="checkout-button"
                   />
                 </div>
               </div>

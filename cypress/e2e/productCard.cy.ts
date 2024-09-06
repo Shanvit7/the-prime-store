@@ -1,6 +1,6 @@
 describe('Product Card Component', () => {
     beforeEach(() => {
-      // Visit the product listing page
+      // Visiting the product listing page
       cy.visit('/shop/products');
     });
   
