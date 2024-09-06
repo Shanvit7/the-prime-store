@@ -138,6 +138,7 @@ const ProductPreview = ({ params }: { params: { id: string } }) => {
                   href={`/shop/products/${productId}`}
                   className="flex items-center px-6 text-sm font-semibold rounded-md bg-gray-200"
                   onClick={disableClick}
+                  data-cy="product-details-link"
                 >
                   See More Details
                 </Link>

@@ -5,7 +5,7 @@ const Reviews = ({ reviews = [] }) => {
   const isEmpty = reviews.length === 0;
 
   return (
-    <div className="mt-8 bg-white shadow-lg rounded-lg overflow-hidden">
+    <div data-cy="product-reviews" className="mt-8 bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="p-6">
         <h2 className="text-2xl font-bold mb-4">Customer Reviews</h2>
         {reviews.map(({

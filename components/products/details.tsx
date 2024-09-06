@@ -4,7 +4,7 @@ const Details = ({
     warrantyInformation = '...',
     category = '...'
 }) => (
-  <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+  <div data-cy="product-details" className="bg-white shadow-lg rounded-lg overflow-hidden">
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Product Details</h2>
       <div className="grid md:grid-cols-2 gap-4">

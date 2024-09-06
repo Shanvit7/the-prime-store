@@ -56,7 +56,7 @@ const Product = ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <main className="container px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+    <main data-cy="product-details-page" className="container px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
       <section className="bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="md:flex">
           <div className="relative h-[50vh] md:h-auto md:w-1/2">
@@ -67,11 +67,12 @@ const Product = ({ params }: { params: { id: string } }) => {
               priority
               className="rounded object-cover p-4"
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 30vw, 20vw"
+              data-cy="product-image"
             />
           </div>
 
           <div className="md:w-1/2 p-6">
-            <h1 className="text-3xl font-bold mb-2">{title}</h1>
+            <h1 data-cy="product-title" className="text-3xl font-bold mb-2">{title}</h1>
             <div className="py-2">
               <VariantCircles
                 images={variantImages}
@@ -80,17 +81,17 @@ const Product = ({ params }: { params: { id: string } }) => {
                 defaultImage={defaultImage}
               />
             </div>
-            <p className="text-gray-600 mb-4">{brand}</p>
+            <p data-cy="product-brand" className="text-gray-600 mb-4">{brand}</p>
             <div className="flex items-center mb-4">
               <Ratings rating={rating} />
               <span className="ml-2 text-gray-600">({rating.toFixed(1)})</span>
             </div>
-            <p className="text-2xl font-bold mb-4">
+            <p  data-cy="product-price" className="text-2xl font-bold mb-4">
               {isFormmatingPrice
                 ? "..."
                 : `${localCurrency} ${convertPrice(price)}`}
             </p>
-            <p className="text-gray-700 mb-4">{description}</p>
+            <p data-cy="product-description" className="text-gray-700 mb-4">{description}</p>
             {inCart ? (
               <RemoveFromCartButton productId={productId} />
             ) : (
