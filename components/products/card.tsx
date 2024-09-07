@@ -28,7 +28,7 @@ const Card: FC<CardProps> = ({ data }) => {
     price = 0,
     thumbnail = "",
   } = data;
-  const { inCart = false } = isProductInCart(productId);
+  const { inCart = false } = isProductInCart(productId) ?? {};
 
   // Fallback to thumbnail if images array is empty
   const defaultImage = images.length > 0 ? getImageUrl(images[0]) : thumbnail;
