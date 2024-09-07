@@ -18,14 +18,14 @@ import useGetProduct from "@/hooks/useGetProduct";
 import useCart from "@/hooks/useCart";
 import useGetCurrency from "@/hooks/useGetCurrency";
 // ASSETS
-import { XMarkIcon, ExclamationCircleIcon } from "@heroicons/react/20/solid";
+import { XMarkIcon } from "@heroicons/react/20/solid";
 
 const ProductPreview = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
   const { id } = params ?? {};
   const productId = Number(id);
   const { isProductInCart } = useCart() ?? {};
-  const { inCart = false } = isProductInCart(productId);
+  const { inCart = false } = isProductInCart(productId) ?? {};
   const {
     product = {},
     isLoading = true,
@@ -47,17 +47,16 @@ const ProductPreview = ({ params }: { params: { id: string } }) => {
   } = useGetCurrency() ?? {};
 
   const defaultImage = images.length > 0 ? getImageUrl(images[0]) : thumbnail;
-  const variantImages = images?.map((img: string) => getImageUrl(img));
-  const [currentImage, setCurrentImage] = useState(defaultImage);
+  const variantImages = images?.map((img: string) => getImageUrl(img)) ?? [];
+  const [currentImage, setCurrentImage] = useState(defaultImage ?? []);
 
   useEffect(() => {
     setCurrentImage(defaultImage);
   }, [defaultImage]);
 
-  const disableClick: MouseEventHandler = (e: MouseEvent) =>
-    e.stopPropagation();
+    const disableClick: MouseEventHandler = (e: MouseEvent) =>  e?.stopPropagation();
 
-  const handleClose: MouseEventHandler = (e: MouseEvent) => {
+    const handleClose: MouseEventHandler = (e: MouseEvent) => {
     disableClick(e);
     router.push("/shop/products");
   };

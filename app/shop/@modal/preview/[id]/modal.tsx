@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const Modal = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const [isPortalReady, setIsPortalReady] = useState(false);
+  const [isPortalReady, setIsPortalReady] = useState<boolean>(false);
 
   useEffect(() => {
     setIsPortalReady(true);
@@ -26,7 +26,7 @@ const Modal = ({ children }: { children: React.ReactNode }) => {
 
   if (!isPortalReady) return null;
 
-  const modalRoot = document.getElementById("modal-root");
+  const modalRoot = document?.getElementById("modal-root");
 
   if (!modalRoot) {
     console.error("The modal root element is not found in the DOM.");
