@@ -33,7 +33,7 @@ const Card: FC<CardProps> = ({ data }) => {
   // Fallback to thumbnail if images array is empty
   const defaultImage = images.length > 0 ? getImageUrl(images[0]) : thumbnail;
   // Retriving variation images, passed as prop to VariantCircles component
-  const variantImages = images?.map((img) => getImageUrl(img));
+  const variantImages = images?.map((img) => getImageUrl(img)) ?? [];
 
   const [currentImage, setCurrentImage] = useState(defaultImage);
   const localPrice = isLoading ? "..." : convertPrice(price);

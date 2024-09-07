@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const Modal = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const [isPortalReady, setIsPortalReady] = useState(false);
+  const [isPortalReady, setIsPortalReady] = useState<boolean>(false);
 
   useEffect(() => {
     setIsPortalReady(true);
